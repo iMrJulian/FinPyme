@@ -12,12 +12,17 @@ export function ButtonsBudget() {
       console.log(navigate("/home/earnings",{replace: true}));
     };
 
+    const handleEgresos = (event) => {
+      event.preventDefault();
+      console.log(navigate("/home/outgoings",{replace: true}));
+    };
+
   return (
     <Stack direction="row" spacing={2} justifyContent="center">
       <Button variant="contained"  onClick={handleIngresos}>
         Ingresos
       </Button>
-      <Button variant="contained">
+      <Button variant="contained" onClick={handleEgresos}>
         Egresos
       </Button>
     </Stack>
