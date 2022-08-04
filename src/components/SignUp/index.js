@@ -13,6 +13,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
+
+const URI = 'http://localhost:8000/users/';
 
 function Copyright(props) {
   return (
@@ -30,17 +33,21 @@ function Copyright(props) {
 const theme = createTheme();
 
 export function SignUp() {
+
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    await axios.post(URI,{
+      name: data.get('name'),
+      celphone: data.get('celphone'),
       email: data.get('email'),
       password: data.get('password'),
-    });
+    })
     navigate("/home/budget",{replace: true});
   };
+
   
   return (
     <ThemeProvider theme={theme}>
@@ -65,10 +72,10 @@ export function SignUp() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="name"
                   required
                   fullWidth
-                  id="firstName"
+                  id="name"
                   label="Empresa"
                   autoFocus
                 />
@@ -77,9 +84,9 @@ export function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
+                  id="celphone"
                   label="Numero"
-                  name="lastName"
+                  name="celphone"
                   autoComplete="family-name"
                   type = "number"
                 />

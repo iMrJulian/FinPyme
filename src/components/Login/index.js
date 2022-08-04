@@ -13,6 +13,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
+
+const URI = 'http://localhost:8000/users/';
 
 function Copyright(props) {
   return (
@@ -32,14 +35,15 @@ const theme = createTheme();
 export function Login() {
   const navigate = useNavigate();
   
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-   console.log(navigate("/home/budget",{replace: true}));
+    
+    const user = await axios.get(URI+data.get('email'));
+
+    if(user.data.password == data.get('password')){
+      console.log(navigate("/home/budget",{replace: true}));
+    }
   };
 
   return (
