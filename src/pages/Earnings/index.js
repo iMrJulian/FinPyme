@@ -13,10 +13,11 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
-
+import axios from 'axios';
 
 const theme = createTheme();
+
+const URI = "http://localhost:8000/earnings/"
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -49,7 +50,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export function Earnings() {
+export function Earnings(props) {
   const navigate = useNavigate();
   const [ingresoName, setIngresoName] = React.useState([]);
 
@@ -63,14 +64,19 @@ export function Earnings() {
     );
   };
 
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+
+    await axios.post(URI,{
+      email: props.email,
+      value: data.get('value'),
+      concept: data.get('concept'),
+      date: data.get('date'),
+      payment: data.get('payment'),
+      product: data.get('producto')
     });
+
     navigate("/home/budget",{replace: true});
   };
   
@@ -99,7 +105,7 @@ export function Earnings() {
                   fullWidth
                   id="value"
                   label="Valor"
-                  autoFocus
+                  type = "number"
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -110,12 +116,12 @@ export function Earnings() {
                   label="Concepto"
                   name="concept"
                   autoComplete="family-name"
-                  type = "number"
+                  autoFocus
                 />
               </Grid>
               <Grid item xs={12}>
               <FormControl sx={{ width: 371 }}>
-                <InputLabel id="demo-multiple-name-label">Name</InputLabel>
+                <InputLabel id="demo-multiple-name-label" >Tipo de pago</InputLabel>
                     <Select
                         labelId="demo-multiple-name-label"
                         id="demo-multiple-name"
@@ -124,12 +130,14 @@ export function Earnings() {
                         onChange={handleChange}
                         input={<OutlinedInput label="Name" />}
                         MenuProps={MenuProps}
+                        name="payment"
                     >
                     {names.map((name) => (
                         <MenuItem
                         key={name}
                         value={name}
                         style={getStyles(name, ingresoName, theme)}
+                        name="payment"
                         >
                         {name}
                         </MenuItem>
@@ -141,7 +149,8 @@ export function Earnings() {
 
               <Grid item xs={4}>
                 <input  
-                    name="requested_order_ship_date"  
+                    name="date"
+                    id="date"  
                     type="date" 
                     className="form-control"
                 />

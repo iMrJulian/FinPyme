@@ -40,7 +40,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export function Outgoings() {
+export function Outgoings(props) {
   const navigate = useNavigate();
   const [ingresoName, setIngresoName] = React.useState([]);
 

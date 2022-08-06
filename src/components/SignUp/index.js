@@ -39,13 +39,18 @@ export function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    await axios.post(URI,{
-      name: data.get('name'),
-      celphone: data.get('celphone'),
-      email: data.get('email'),
-      password: data.get('password'),
-    })
-    navigate("/home/budget",{replace: true});
+    const user = await axios.get(URI+data.get('email'));
+    if(user.data == null){
+      await axios.post(URI,{
+        name: data.get('name'),
+        celphone: data.get('celphone'),
+        email: data.get('email'),
+        password: data.get('password'),
+      })
+      navigate("/home/budget",{replace: true});
+    } else {
+      console.log("Correo ya registrado");
+    }
   };
 
   

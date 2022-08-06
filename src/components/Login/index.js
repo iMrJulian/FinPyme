@@ -32,7 +32,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export function Login() {
+export function Login(props) {
   const navigate = useNavigate();
   
   const handleSubmit = async (event) => {
@@ -41,8 +41,13 @@ export function Login() {
     
     const user = await axios.get(URI+data.get('email'));
 
-    if(user.data.password == data.get('password')){
+    if(user.data == null){
+      console.log("Usuario incorrecto");
+    }else if(user.data.password == data.get('password')){
+      props.setEmail(data.get('email'));
       console.log(navigate("/home/budget",{replace: true}));
+    } else{
+      console.log("Contraseña incorrecta");
     }
   };
 
