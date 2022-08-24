@@ -3,7 +3,7 @@ import cors from "cors";
 import dbConnection from "./database/dbConnection.js";
 import routes from "./routes/routes.js";
 
-const app = express();
+const app = express(); //sera la API
 
 app.use(cors());
 app.use(express.json());

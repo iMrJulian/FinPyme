@@ -39,7 +39,7 @@ export function Login(props) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     
-    const user = await axios.get(URI+data.get('email'));
+    const user = await axios.get(URI+data.get('email')); //petición a la URL
 
     if(user.data == null){
       console.log("Usuario incorrecto");

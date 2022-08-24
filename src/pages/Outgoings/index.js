@@ -13,8 +13,11 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import axios from 'axios';
 
 const theme = createTheme();
+
+const URI = "http://localhost:8000/outgoings/"
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -28,7 +31,14 @@ const MenuProps = {
 };
 
 const names = [
-
+  'Efectivo',
+  'Tarjeta debito',
+  'Tarjeta credito',
+  'Transferencia bancaria',
+  'Nequi',
+  'Daviplata',
+  'Otro',
+  'Por pagar',
 ];
 
 function getStyles(name, personName, theme) {
@@ -55,13 +65,19 @@ export function Outgoings(props) {
   };
 
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => { //al usar await uso async - para esperar la respuesta del servidor y el await encuentra respuesta
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+    
+    await axios.post(URI,{
+      email: props.email,
+      value: data.get('value'),
+      concept: data.get('concept'),
+      payment: data.get('payment'),
+      date: data.get('date'),
+      category: data.get('category')
     });
+
     navigate("/home/budget",{replace: true});
   };
   
@@ -101,7 +117,7 @@ export function Outgoings(props) {
                   label="Concepto"
                   name="concept"
                   autoComplete="family-name"
-                  type = "number"
+                  
                 />
               </Grid>
               <Grid item xs={12}>
@@ -115,6 +131,7 @@ export function Outgoings(props) {
                         onChange={handleChange}
                         input={<OutlinedInput label="Name" />}
                         MenuProps={MenuProps}
+                        name="payment"
                     >
                     {names.map((name) => (
                         <MenuItem
@@ -132,7 +149,8 @@ export function Outgoings(props) {
 
               <Grid item xs={4}>
                 <input  
-                    name="requested_order_ship_date"  
+                    name="date"  
+                    id="date"
                     type="date" 
                     className="form-control"
                 />
@@ -140,11 +158,11 @@ export function Outgoings(props) {
               <Grid item xs={8}>
                 <TextField
                   autoComplete="given-name"
-                  name="producto"
+                  name="category"
                   required
                   fullWidth
-                  id="producto"
-                  label="Producto"
+                  id="category"
+                  label="Categoria"
                   autoFocus
                 />
               </Grid>

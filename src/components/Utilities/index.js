@@ -6,7 +6,6 @@ import Grid from '@mui/material/Grid';
 import { GridContainer } from './styles';
 
 
-
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -15,7 +14,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export function Utilities() {
+export function Utilities(sumaEarnings,sumaOutgoings) {
   return (
     <GridContainer>
     <Box sx={{ flexGrow: 1 }}>
@@ -24,19 +23,19 @@ export function Utilities() {
           <Item>
             <div className = "utilidades">
                 <p> Utilidades totales </p>
-                <p> $0 </p>
+                <p> $ {sumaEarnings-sumaOutgoings} </p>
             </div>
           </Item>
         </Grid>
         <Grid item xs={6}>
           <Item>
             <div className = "ventas">
-                <p> Ventas totales </p>
-                <p> $0 </p>
+                <p> Ingresos totales </p>
+                <p> $ {sumaEarnings} </p>
             </div>
             <div className = "egresos">
                 <p> Egresos totales </p>
-                <p> $0 </p>
+                <p> $ {sumaOutgoings} </p>
             </div>
           </Item>
         </Grid>

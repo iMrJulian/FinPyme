@@ -65,7 +65,7 @@ export function Earnings(props) {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault(); //no se recargue la pagina
     const data = new FormData(event.currentTarget);
 
     await axios.post(URI,{

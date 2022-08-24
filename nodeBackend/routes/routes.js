@@ -1,5 +1,5 @@
 import express from "express";
-import { createEarning, createUser, getAllEarnings, getAllUsers, getEarningsUser, getUser } from "../controllers/controller.js";
+import { createEarning, createUser, getAllEarnings, getAllUsers, getEarningsUser, getUser, sumaryEarning, createOutgoing, getAllOutgoing, getOutgoingUser, getEarningsUserDate,getOutgoingUserDate } from "../controllers/controller.js";
 
 const router = express.Router();
 
@@ -9,8 +9,16 @@ router.get('/users/:email',getUser);
 router.post('/users/',createUser);
 
 /* Rutas para la coleccion de ingresos */
-router.get('/earnings',getAllEarnings);
-router.get('/earnings/:email',getEarningsUser);
-router.post('/earnings/',createEarning);
+router.get('/earnings/',getAllEarnings);
+router.get('/earnings/:email',getEarningsUser); // paso un usuario
+router.post('/earnings/',createEarning); // creo un usuario
 
+/*Rutas para la colección*/
+router.get('/outgoings/',getAllOutgoing);
+router.get('/outgoings/:email',getOutgoingUser);
+router.post('/outgoings/',createOutgoing);
+
+/*Rutas para la fecha*/
+router.get('/earnings/:email/:date',getEarningsUserDate);
+router.get('/outgoings/:email/:date',getOutgoingUserDate);
 export default router;

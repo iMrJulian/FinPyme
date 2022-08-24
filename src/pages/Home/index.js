@@ -8,16 +8,20 @@ import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+//import axios from 'axios';
 
-export function Home (){
+const URI = 'http://localhost:8000/earnings/';
+
+export function Home (props){
     const [open, setOpen] = useState(false);
-    const navigate = useNavigate();
-
+    const navigate = useNavigate();        
+    
     const handleClick = (path) => {
         navigate(`/home/${path}`, { replace: true })
     }
 
     const handleClose = () => {
+        
         setOpen(false);
     }
 

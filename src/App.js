@@ -8,7 +8,6 @@ import { Earnings } from './pages/Earnings';
 import { Outgoings } from './pages/Outgoings';
 import React from "react";
 
-
 function App() {
 
   const [email, setEmail] = React.useState(null);
@@ -18,8 +17,8 @@ function App() {
         <Routes>
           <Route path="/" element={ <Login setEmail = {setEmail} /> } />
           <Route path="/signup" element={ <SignUp setEmail = {setEmail}/> } />
-          <Route path="/home/*" element={ <Home/> }>
-            <Route path ="budget" element={ <Budget email={email}/> } />
+          <Route path="/home/*" element={ <Home email = {email}/> }>
+            <Route path ="budget" element={ <Budget email={email}/> } /> 
             <Route path ="inventary" element={ <Inventory email={email}/> } />
             <Route path ="earnings" element={ <Earnings email={email}/> } />
             <Route path ="outgoings" element={ <Outgoings email={email}/> } />
