@@ -4,9 +4,13 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import { Utilities } from "../../components/Utilities";
-import { ButtonsBudget } from "../../components/ButtonsBudget";
+import { ButtonInventory } from "../../components/ButtonInventory";
 import { ListComponent } from "../../components/List";
 import axios from 'axios';
+import { inventoryFeatures } from "../../components/inventaryFeatures";
+import { ListProduct } from "../../components/ListProduct";
+
+const URIproducts = "http://localhost:8000/products/"
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -16,14 +20,29 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
   }));
 
-export function Inventory(){
+
+
+export function Inventory(props){
+
+    const[listProducts,setListProduct] = useState([])
+    useEffect(()=>{
+      //funciones
+    },[])
+
+    const products = async () =>{
+      const products = await axios.get(URIproducts + props.email);
+      
+      
+    }
+
     return(
         <Box sx={{ width: '100%' }}>
         <Stack spacing={2}>
-          <Item>  </Item>
-          <Item>  </Item>
-          <Item>  </Item>
-          <Item>  </Item>
+          <Item> 
+              {inventoryFeatures()}           
+          </Item>
+          <Item> { ListProduct() } </Item>          
+          <Item> { ButtonInventory(props) } </Item>
         </Stack>
       </Box>
     )

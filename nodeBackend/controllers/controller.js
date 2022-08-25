@@ -28,7 +28,7 @@ export const getUser = async (req,res) => {
 //Crear un usuario
 export const createUser = async (req,res) => {
     try {
-        await UserModel.create(req.body);
+        await UserModel.create(req.body); //el cuerpo del arreglo
         res.status(200).json({"message": "Usuario nuevo creado"});
     } catch (error) {
         res.json({message: error.message});
