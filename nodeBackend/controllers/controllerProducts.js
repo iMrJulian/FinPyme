@@ -9,3 +9,20 @@ export const createProducts = async (req, res) => {
         res.json({message: error.message});
     }
 }
+
+//Obtener productos
+export const getUserProducts = async (req,res) => {
+    try{
+        const email = req.params.email;
+        const products = await ProductModel.find({
+            'email' : email
+        })
+        .then((products =>
+            {
+                res.status(200).json(products);
+            }));
+        
+    }catch(error){
+        res.json({message: error.message});
+    }
+}

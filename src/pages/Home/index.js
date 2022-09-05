@@ -3,6 +3,7 @@ import { NavBar }from '../../components/NavBar';
 import { ContainerBottons, WrapHome } from './styles';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import InventoryIcon from '@mui/icons-material/Inventory';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -69,6 +70,11 @@ export function Home (props){
                     < InventoryIcon />
                     <p> Inventario </p>
                 </ContainerBottons>
+                <ContainerBottons onClick={() => handleClick('stadistics')}>
+                    < TrendingUpIcon />
+                    <p> Estadisticas </p>
+                </ContainerBottons>
+
             </NavBar>
         </WrapHome>
     )

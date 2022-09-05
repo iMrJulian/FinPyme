@@ -7,7 +7,7 @@ import { Utilities } from "../../components/Utilities";
 import { ButtonInventory } from "../../components/ButtonInventory";
 import { ListComponent } from "../../components/List";
 import axios from 'axios';
-import { inventoryFeatures } from "../../components/inventaryFeatures";
+import { InventaryFeatures } from "../../components/InventaryFeatures";
 import { ListProduct } from "../../components/ListProduct";
 
 const URIproducts = "http://localhost:8000/products/"
@@ -20,28 +20,41 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
   }));
 
-
-
 export function Inventory(props){
 
     const[listProducts,setListProduct] = useState([])
+    const[valorTotal,setValorTotal]=useState(0)
     useEffect(()=>{
       //funciones
+      products();
+      total();
     },[])
 
     const products = async () =>{
       const products = await axios.get(URIproducts + props.email);
-      
-      
+      setListProduct(products.data);    
+      var total = 0;
+      products.data.forEach(product =>{
+        total += product.costUnit;
+      });
+      setValorTotal(total);
+    }
+
+    const total = () => {
+      var total = 0;
+      listProducts.forEach(product =>{
+        total += product.costUnit;
+      });
+      setValorTotal(total);
     }
 
     return(
         <Box sx={{ width: '100%' }}>
         <Stack spacing={2}>
           <Item> 
-              {inventoryFeatures()}           
+              {InventaryFeatures(listProducts.length, valorTotal)}           
           </Item>
-          <Item> { ListProduct() } </Item>          
+          <Item> { ListProduct(listProducts) } </Item>          
           <Item> { ButtonInventory(props) } </Item>
         </Stack>
       </Box>

@@ -1,6 +1,7 @@
 import express from "express";
 import { createEarning, createUser, getAllEarnings, getAllUsers, getEarningsUser, getUser, sumaryEarning, createOutgoing, getAllOutgoing, getOutgoingUser, getEarningsUserDate,getOutgoingUserDate } from "../controllers/controller.js";
-import { createProducts } from "../controllers/controllerProducts.js";
+import { createProducts, getUserProducts } from "../controllers/controllerProducts.js";
+import { getStadisctisEarningUserDate } from "../controllers/controllerStadistics.js";
 
 const router = express.Router();
 
@@ -24,5 +25,8 @@ router.get('/earnings/:email/:date',getEarningsUserDate);
 router.get('/outgoings/:email/:date',getOutgoingUserDate);
 
 /*Rutas para los productos*/
+router.get('/products/:email',getUserProducts);
 router.post('/products/',createProducts);
 export default router;
+
+router.get('/stadistics/:email/:date',getStadisctisEarningUserDate);

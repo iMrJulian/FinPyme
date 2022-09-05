@@ -14,27 +14,27 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export function ListProduct() {
+export function ListProduct(listProducts) {
     
   return (    
     <GridContainer>
     <Box sx={{ flexGrow: 1 }}>        
       <Grid container spacing={1}>
-        {[0,1].map((value) => {
-            return(
-                <Grid item xs={12}>
+        {listProducts.map((product) => {
+            return(              
+                <Grid key={product._id} item xs={12}>
                     <Item>
                     <div className = "Name">
-                        <h3> Nombre productos </h3>    
+                        <h3> {product.name} </h3>    
                     </div>
                     <div className = "Stock">
-                        <p> Disponibilidad inventario 0</p>                
+                        <p> Disponibilidad: {product.stock} </p>                
                     </div>
                     <div className = "unitValue">
-                        <p> Valor Unitario $ 0 </p>                
+                        <p> Valor Unitario $ {product.priceUnit} </p>                
                     </div>
                     <div className = "valueCost">
-                        <p> Costo Unitario $ 0 </p>                
+                        <p> Costo Unitario $ {product.costUnit} </p>                
                     </div>
                     </Item>
                 </Grid> 

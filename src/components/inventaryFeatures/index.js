@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
@@ -14,7 +14,21 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export function inventoryFeatures() {
+export function InventaryFeatures(cantidadProductos, valorTotal) {
+
+  //  const[cantidadProductos,setCantidadProducts] = useState(0)
+   
+  //   useEffect(()=>{
+  //     //funciones
+  //     total_productos();
+  //     console.log("prueba"+listProducts);
+  //   },[])
+
+  // const total_productos = () =>{
+  //   const cantidad_productos = listProducts.length;
+  //   console.log("Cantidad: "+listProducts.length);
+  //   setCantidadProducts(cantidad_productos);
+  // }
     
   return (
     <GridContainer>
@@ -24,7 +38,7 @@ export function inventoryFeatures() {
           <Item>
             <div className = "Productos">
                 <p> Cantidad productos </p>
-                <p> $ 0 </p>
+                <p> {cantidadProductos} </p>
             </div>
           </Item>
         </Grid>
@@ -32,7 +46,7 @@ export function inventoryFeatures() {
           <Item>
             <div className = "Costo">
                 <p> Costo total </p>
-                <p> $ 0 </p>
+                <p> $ {valorTotal} </p>
             </div>
           </Item>
         </Grid>

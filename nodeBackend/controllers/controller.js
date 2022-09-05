@@ -125,7 +125,7 @@ export const getEarningsUserDate = async (req, res) => {
         })
         .then( ( earnings => {
             res.status(200).json(earnings);
-            console.log(earnings);
+            // console.log(earnings);
         }));
     } catch (error) {
         res.json({message: error.message});

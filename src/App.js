@@ -8,6 +8,7 @@ import { Earnings } from './pages/Earnings';
 import { Outgoings } from './pages/Outgoings';
 import { Products } from './pages/Products';
 import React from "react";
+import { Stadistics } from "./pages/Stadistics";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/home/*" element={ <Home email = {email}/> }>
             <Route path ="budget" element={ <Budget email={email}/> } /> 
             <Route path ="inventary" element={ <Inventory email={email}/> } />
+            <Route path ="stadistics" element={ <Stadistics email={email}/> } />
             <Route path ="earnings" element={ <Earnings email={email}/> } />
             <Route path ="outgoings" element={ <Outgoings email={email}/> } />
             <Route path ="products" element={ <Products email={email}/>} />
