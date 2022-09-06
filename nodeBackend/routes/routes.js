@@ -1,7 +1,7 @@
 import express from "express";
 import { createEarning, createUser, getAllEarnings, getAllUsers, getEarningsUser, getUser, sumaryEarning, createOutgoing, getAllOutgoing, getOutgoingUser, getEarningsUserDate,getOutgoingUserDate } from "../controllers/controller.js";
 import { createProducts, getUserProducts } from "../controllers/controllerProducts.js";
-import { getStadisctisEarningUserDate } from "../controllers/controllerStadistics.js";
+import { getStadisctisEarningUserDate,getStadisctisOutgoingUserDate } from "../controllers/controllerStadistics.js";
 
 const router = express.Router();
 
@@ -29,4 +29,5 @@ router.get('/products/:email',getUserProducts);
 router.post('/products/',createProducts);
 export default router;
 
-router.get('/stadistics/:email/:date',getStadisctisEarningUserDate);
+router.get('/stadisticsEarnings/:email/:date',getStadisctisEarningUserDate);
+router.get('/stadisticsOutgoings/:email/:date',getStadisctisOutgoingUserDate);

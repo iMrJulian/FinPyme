@@ -3,24 +3,26 @@ import { Graphic } from "../../components/Graphic";
 // import { LineChart } from "../../components/LineChart";
 import axios from 'axios';
 
-const URIStadistics = "http://localhost:8000/Stadistics/"
+const URIStadisticsEarning = "http://localhost:8000/stadisticsEarnings/"
+const URIStadisticsOutgoing = "http://localhost:8000/stadisticsOutgoings/"
 
 export function Stadistics(props){
     
     
     const [dateEarning,setDateEarning] = useState([]);
+    const [dateOutgoing,setDateOutgoing] = useState([]);
     const [fecha,setFecha] = useState("");
 
     const handleChange = async (event) =>{
+        //Obtener los ingresos por día
         const dateSelect = event.target.value;
-        
-        const fecha = new Date(dateSelect);
-        const fechaUTC = fecha.toUTCString();
-        const date = await axios.get(URIStadistics + props.email + "/" + dateSelect);
-        setDateEarning(date.data);
+        const dateEarnings = await axios.get(URIStadisticsEarning + props.email + "/" + dateSelect);
+        setDateEarning(dateEarnings.data);
         setFecha(dateSelect);
-        // console.log(fechaUTC);
-        // const mes=(fechaUTC.getMonth()+1)<10?"0"+(fechaUTC.getMonth()+1):fechaUTC.getMonth()+1;
+        //Obtener los egresos por día
+        const dateOutgoings = await axios.get(URIStadisticsOutgoing + props.email + "/" + dateSelect);
+        setDateOutgoing(dateOutgoings.data);
+        // console.log(dateOutgoings.data);
     }
 
     
@@ -31,7 +33,7 @@ export function Stadistics(props){
                 className="form-control"
                 onChange={handleChange}
             /> 
-            { <Graphic dateEarning={dateEarning} fecha ={fecha} /> }
+            { <Graphic dateEarning={dateEarning} dateOutgoing={dateOutgoing} fecha ={fecha} /> }
             
         </div>        
     )

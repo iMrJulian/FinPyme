@@ -26,11 +26,11 @@ ChartJS.register(
 
 const options = {
     responsive: true,
-    scale: {
-        y: {
-            min: 0,
-        },
-    },
+    // scale: {
+    //     y: {
+    //         min: 0,
+    //     },
+    // },
     plugins: {
         legend: {
             display: true,
@@ -43,6 +43,7 @@ export function Graphic(props){
     var earnings = [];
     var outgoings = [];
     var labels = [];    
+    var budget = [];
 
     // useEffect (()=>{
     //     inicializar();
@@ -112,43 +113,69 @@ export function Graphic(props){
             labels [i-1] = i;
             earnings [i-1] = 0;
             outgoings [i-1] = 0;
+            budget [i-1] = 0;
         }
 
         props.dateEarning.forEach( earning => {
             const fecha = new Date(earning._id); 
             const dia = fecha.getDate();
-            console.log(dia);
+            // console.log(dia);            
             earnings[dia] = earning.sumaEarnins;
-            console.log("earning value"+earning.sumaEarnins);
-            console.log("dia earning"+earnings[dia]);
-        }
-
-        )
+            budget[dia] = earning.sumaEarnins;
+            // console.log("earning value"+earning.sumaEarnins);
+            // console.log("dia earning"+earnings[dia]);
+        })
+        
+        props.dateOutgoing.forEach( outgoing => {
+            // console.log(outgoing._id);
+            // console.log(outgoing.sumaOutgoing);
+            const fecha = new Date(outgoing._id);
+            const dia = fecha.getDate();
+            outgoings[dia] = outgoing.sumaOutgoing;
+            budget[dia] = budget[dia] - outgoing.sumaOutgoing;
+        })        
     }
 
     inicializar();
     
     const data = { datasets: [ 
         {
-            label: "Mis datos",
+            label: "Ingresos",
             data: earnings,
             tension: 0.3,
-            borderColor: "rgb(75,192,192)",
-            pointRadius: 8,
-            pointBackgroundColor: "rgb(0,192,192)",
+            borderColor: "#00c04b",
+            pointRadius: 4,
+            pointBackgroundColor: "#00c04b",
         },{
-            label: "Mis datos 2",
+            label: "Egresos",
             data: outgoings,
             tension: 0.3,
-            borderColor: "rgb(0,142,192)",
-            pointRadius: 8,
-            pointBackgroundColor: "rgb(0,192,192)",
+            borderColor: "rgb(255,22,12)",
+            pointRadius: 4,
+            pointBackgroundColor: "rgb(255,22,12)",
             }
     ], 
     labels,
     };
 
+    const dataBudget ={ datasets: [
+        {
+            label: "Balance",
+            data: budget,
+            tension: 0.3,
+            borderColor: "rgb(75,192,192)",
+            pointRadius: 4,
+            pointBackgroundColor: "rgb(0,192,192)",
+        }
+    ],
+    labels,
+    };
+
     return(
-        <Line data={ data } options= { options } redraw = { true } />
+        <div>
+            <Line data={ data } options= { options } updateMode = { true }/>
+            <Line data={ dataBudget } options= { options } updateMode = { true }/>
+        </div>
+        
     )
 }
