@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
-import { Line } from "react-chartjs-2";
+import { Line, Doughnut } from "react-chartjs-2";
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import { styled } from '@mui/material/styles';
 import{
     Chart as ChartJS,
     CategoryScale,
@@ -10,19 +15,28 @@ import{
     Tooltip,
     Legend,
     Filler,
+    ArcElement,
 } from "chart.js";
-import { add } from "date-fns";
 
 ChartJS.register(
     CategoryScale,
     LinearScale,
     PointElement,
     LineElement,
+    ArcElement,
     Title,
     Tooltip,
     Legend,
     Filler
 );
+
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
 
 const options = {
     responsive: true,
@@ -33,7 +47,7 @@ const options = {
     // },
     plugins: {
         legend: {
-            display: true,
+            display: true,            
         }
     }
 }
@@ -44,12 +58,10 @@ export function Graphic(props){
     var outgoings = [];
     var labels = [];    
     var budget = [];
-
-    // useEffect (()=>{
-    //     inicializar();
-    //     }
-    // ,[])
- 
+    var valueEarning = [];
+    var conceptEarning = [];
+    var valueOutgoing = [];
+    var conceptOutgoing = [];
 
     props.dateEarning.forEach(earning => {
          
@@ -119,21 +131,27 @@ export function Graphic(props){
         props.dateEarning.forEach( earning => {
             const fecha = new Date(earning._id); 
             const dia = fecha.getDate();
-            // console.log(dia);            
             earnings[dia] = earning.sumaEarnins;
             budget[dia] = earning.sumaEarnins;
-            // console.log("earning value"+earning.sumaEarnins);
-            // console.log("dia earning"+earnings[dia]);
         })
         
         props.dateOutgoing.forEach( outgoing => {
-            // console.log(outgoing._id);
-            // console.log(outgoing.sumaOutgoing);
             const fecha = new Date(outgoing._id);
             const dia = fecha.getDate();
             outgoings[dia] = outgoing.sumaOutgoing;
             budget[dia] = budget[dia] - outgoing.sumaOutgoing;
-        })        
+        })
+        
+        props.categoryEarning.forEach( earning=>{
+            conceptEarning.push(earning._id);
+            valueEarning.push(earning.sumaEarning);
+        })
+
+        props.categoryOutgoing.forEach( outgoing =>{
+            conceptOutgoing.push(outgoing._id);
+            valueOutgoing.push(outgoing.sumaOutgoing);
+        })
+
     }
 
     inicializar();
@@ -171,11 +189,74 @@ export function Graphic(props){
     labels,
     };
 
+    const categoryEarning ={ 
+        labels: conceptEarning, 
+        datasets: [
+        {
+            label: "Ingresos",
+            data: valueEarning,
+            tension: 0.3,
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+            ],            
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+            ],
+            borderWidth: 1,
+        }
+    ],
+    conceptEarning,
+    };
+
+    const categoryOutgoing ={ 
+        labels: conceptOutgoing, 
+        datasets: [
+        {
+            label: "Egresos",
+            data: valueOutgoing,
+            tension: 0.3,
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+            ],            
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+            ],
+            borderWidth: 1,
+        }
+    ],
+    conceptOutgoing,
+    };
+
     return(
-        <div>
+        <div>     
             <Line data={ data } options= { options } updateMode = { true }/>
             <Line data={ dataBudget } options= { options } updateMode = { true }/>
-        </div>
-        
+            <Box sx={{ width: '100%' }}>
+            <Stack direction="row" divider={<Divider orientation="vertical" flexItem />}  justifyContent="center" alignItems="center" spacing={2}>
+                <Item> <Doughnut data={ categoryEarning } options= { options } updateMode = { true }/> </Item>
+                <Item> <Doughnut data={ categoryOutgoing } options= { options } updateMode = { true }/> </Item>
+            </Stack> 
+            </Box>                  
+        </div>  
     )
 }

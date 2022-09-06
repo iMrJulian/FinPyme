@@ -5,12 +5,16 @@ import axios from 'axios';
 
 const URIStadisticsEarning = "http://localhost:8000/stadisticsEarnings/"
 const URIStadisticsOutgoing = "http://localhost:8000/stadisticsOutgoings/"
+const URICategoryEarning = "http://localhost:8000/stadisticsCategoryEarning/"
+const URICategoryOutgoing = "http://localhost:8000/stadisticsCategoryOutgoing/"
 
 export function Stadistics(props){
     
     
     const [dateEarning,setDateEarning] = useState([]);
     const [dateOutgoing,setDateOutgoing] = useState([]);
+    const [categoryEarning,setCategoryEarning] = useState([]);
+    const [categoryOutgoing,setCategoryOutgoing] = useState([]);
     const [fecha,setFecha] = useState("");
 
     const handleChange = async (event) =>{
@@ -22,10 +26,11 @@ export function Stadistics(props){
         //Obtener los egresos por día
         const dateOutgoings = await axios.get(URIStadisticsOutgoing + props.email + "/" + dateSelect);
         setDateOutgoing(dateOutgoings.data);
-        // console.log(dateOutgoings.data);
-    }
-
-    
+        const categoryEarnings = await axios.get(URICategoryEarning + props.email + "/" + dateSelect);
+        setCategoryEarning(categoryEarnings.data);
+        const categoryOutgoings = await axios.get(URICategoryOutgoing + props.email + "/" + dateSelect);
+        setCategoryOutgoing(categoryOutgoings.data);
+    }   
 
     return(
         <div>
@@ -33,7 +38,7 @@ export function Stadistics(props){
                 className="form-control"
                 onChange={handleChange}
             /> 
-            { <Graphic dateEarning={dateEarning} dateOutgoing={dateOutgoing} fecha ={fecha} /> }
+            { <Graphic dateEarning = { dateEarning } dateOutgoing = { dateOutgoing } categoryEarning = { categoryEarning } categoryOutgoing= { categoryOutgoing }fecha ={fecha} /> }
             
         </div>        
     )
