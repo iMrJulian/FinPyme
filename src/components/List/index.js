@@ -27,7 +27,7 @@ export function ListComponent(earnings,outgoings) {
   };
   
   return (
-    <List dense sx={{ width: '100%', maxWidth: '98%', bgcolor: 'background.paper', margin: "15px"}}>
+    <List dense sx={{ width: '100%', maxWidth: '98%', bgcolor: 'background.paper', margin: "1px", height: "18vh", overflowY: "auto"}}>
       {earnings.map((value) => {        
         const labelId = `checkbox-list-secondary-label`;
         return (

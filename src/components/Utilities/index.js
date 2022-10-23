@@ -12,16 +12,20 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: 'center',
   color: theme.palette.text.secondary,
+  height: "90%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center"
 }));
 
 export function Utilities(sumaEarnings,sumaOutgoings) {
   return (
-    <GridContainer>
+    <GridContainer >
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={1}>
         <Grid item xs={6}>
           <Item>
-            <div className = "utilidades">
+            <div>
                 <p> Utilidades totales </p>
                 <p> $ {sumaEarnings-sumaOutgoings} </p>
             </div>
@@ -29,13 +33,15 @@ export function Utilities(sumaEarnings,sumaOutgoings) {
         </Grid>
         <Grid item xs={6}>
           <Item>
-            <div className = "ventas">
-                <p> Ingresos totales </p>
-                <p> $ {sumaEarnings} </p>
-            </div>
-            <div className = "egresos">
-                <p> Egresos totales </p>
-                <p> $ {sumaOutgoings} </p>
+            <div >
+              <div className = "ventas">
+                  <p> Ingresos totales </p>
+                  <p> $ {sumaEarnings} </p>
+              </div>
+              <div className = "egresos">
+                  <p> Egresos totales </p>
+                  <p> $ {sumaOutgoings} </p>
+              </div>
             </div>
           </Item>
         </Grid>

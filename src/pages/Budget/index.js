@@ -19,6 +19,18 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+const ItemDate = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: `${theme.spacing(1)} ${theme.spacing(4)}`,
+  textAlign: 'center',
+  margin: "0",
+  color: theme.palette.text.secondary,
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+}));
+
 export function Budget(props){ // props todo el arreglo que recibo
 
     const [sumaEarnings,setSumaEarning] = useState([])
@@ -79,9 +91,9 @@ export function Budget(props){ // props todo el arreglo que recibo
 
     return(
         <Box sx={{ width: '100%' }}>
-        <Stack spacing={2}>
+        <Stack spacing={1}>
           <Item> { Utilities(sumaEarnings,sumaOutgoings) } </Item>
-          <Item>
+          <ItemDate>
               <input  
                 name="requested_order_ship_date"  
                 type="date" 
@@ -89,7 +101,7 @@ export function Budget(props){ // props todo el arreglo que recibo
                 onChange={handleChange}
               />
               $ {utilitiesDate}              
-          </Item>
+          </ItemDate>
           <Item> { ListComponent(earnings,outgoings) }</Item>
           <Item> { ButtonsBudget(props) } </Item>
         </Stack>
