@@ -8,4 +8,5 @@ export const GridContainer = styled.div.attrs({className: "GridContainerComponen
     // }
     overflow-y: auto;
     height: 42vh;
+
 `; 

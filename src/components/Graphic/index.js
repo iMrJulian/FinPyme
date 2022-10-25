@@ -5,6 +5,7 @@ import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
+import { WrapperGraphics } from "./styles";
 import{
     Chart as ChartJS,
     CategoryScale,
@@ -35,6 +36,8 @@ const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'center',
+    width: "43%",
+    height: "25%",
     color: theme.palette.text.secondary,
   }));
 
@@ -248,15 +251,21 @@ export function Graphic(props){
     };
 
     return(
-        <div>     
+        <WrapperGraphics>     
             <Line data={ data } options= { options } updateMode = { true }/>
             <Line data={ dataBudget } options= { options } updateMode = { true }/>
             <Box sx={{ width: '100%' }}>
-            <Stack direction="row" divider={<Divider orientation="vertical" flexItem />}  justifyContent="center" alignItems="center" spacing={2}>
+            <Stack 
+                direction="row"
+                divider={<Divider orientation="vertical" flexItem />}  
+                justifyContent="center" 
+                alignItems="center" 
+                spacing={1}
+            >
                 <Item> <Doughnut data={ categoryEarning } options= { options } updateMode = { true }/> </Item>
                 <Item> <Doughnut data={ categoryOutgoing } options= { options } updateMode = { true }/> </Item>
             </Stack> 
             </Box>                  
-        </div>  
+        </WrapperGraphics>  
     )
 }

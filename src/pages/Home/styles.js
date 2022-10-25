@@ -15,7 +15,9 @@ export const WrapHome = styled.div`
         display: flex;
         width: 100%;
         justify-content: center;
-
+        font-size: 25px;
+        font-weight: 600;
+        margin-right: 5%;
     }
 `; 
 

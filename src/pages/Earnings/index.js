@@ -153,6 +153,14 @@ export function Earnings(props) {
                     id="date"  
                     type="date" 
                     className="form-control"
+
+                    style = {{
+                      border: "1px solid #dfdfdf",
+                      borderRadius: "10px",
+                      fontSize: "12px",
+                      padding: "10px"
+                  }}      
+                    
                 />
               </Grid>
               <Grid item xs={8}>

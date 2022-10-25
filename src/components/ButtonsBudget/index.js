@@ -19,10 +19,10 @@ export function ButtonsBudget() {
 
   return (
     <Stack direction="row" spacing={2} justifyContent="center">
-      <Button variant="contained"  onClick={handleIngresos}>
+      <Button variant="contained"  onClick={handleIngresos} color = "success">
         Ingresos
       </Button>
-      <Button variant="contained" onClick={handleEgresos}>
+      <Button variant="contained" onClick={handleEgresos} color = "error">
         Egresos
       </Button>
     </Stack>

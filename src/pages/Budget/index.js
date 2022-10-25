@@ -99,6 +99,13 @@ export function Budget(props){ // props todo el arreglo que recibo
                 type="date" 
                 className="form-control"
                 onChange={handleChange}
+
+                style = {{
+                  border: "1px solid #dfdfdf",
+                  borderRadius: "10px",
+                  fontSize: "12px",
+                  padding: "3px 10px"
+                }}
               />
               $ {utilitiesDate}              
           </ItemDate>

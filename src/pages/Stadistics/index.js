@@ -34,10 +34,19 @@ export function Stadistics(props){
 
     return(
         <div>
-            <input type="month"
-                className="form-control"
-                onChange={handleChange}
-            /> 
+            <div style={ {display: "flex", justifyContent: "center", marginTop: "5px"} }>
+                <input type="month"
+                    className="form-control"
+                    onChange={handleChange}
+
+                    style = {{
+                        border: "1px solid #dfdfdf",
+                        borderRadius: "10px",
+                        fontSize: "12px",
+                        padding: "10px"
+                    }}
+                /> 
+            </div>
             { <Graphic dateEarning = { dateEarning } dateOutgoing = { dateOutgoing } categoryEarning = { categoryEarning } categoryOutgoing= { categoryOutgoing }fecha ={fecha} /> }
             
         </div>        

@@ -8,14 +8,16 @@ import { GridContainer } from './styles';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
+  // ...theme.typography.body2,
+  padding: theme.spacing(),
   textAlign: 'left',
   color: theme.palette.text.secondary,
 }));
 
 export function ListProduct(listProducts) {
     
+  const styles = {margin: "5px 0"}
+
   return (    
     <GridContainer>
     <Box sx={{ flexGrow: 1 }}>        
@@ -25,16 +27,16 @@ export function ListProduct(listProducts) {
                 <Grid key={product._id} item xs={12}>
                     <Item>
                     <div className = "Name">
-                        <h3> {product.name} </h3>    
+                        <h3 style = {styles} > {product.name} </h3>    
                     </div>
                     <div className = "Stock">
-                        <p> Disponibilidad: {product.stock} </p>                
+                        <p style = {styles}> Disponibilidad: {product.stock} </p>                
                     </div>
                     <div className = "unitValue">
-                        <p> Valor Unitario $ {product.priceUnit} </p>                
+                        <p style = {styles}> Valor Unitario $ {product.priceUnit} </p>                
                     </div>
                     <div className = "valueCost">
-                        <p> Costo Unitario $ {product.costUnit} </p>                
+                        <p style = {styles}> Costo Unitario $ {product.costUnit} </p>                
                     </div>
                     </Item>
                 </Grid> 
